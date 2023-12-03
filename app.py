@@ -29,7 +29,7 @@ if page == "Edit Data":
         id = result['id']
         student_name_lama = result["Name"]
         student_id_lama = result["NRP"]
-        phone_number_lama = result["phone Number"]
+        phone_number_lama = result["Phone Number"]
         visit_date_lama = result["Visit Date"]
         visit_time_lama = result["Visit Time"]
         intention_lama = result["Intention"]
