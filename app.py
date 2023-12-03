@@ -6,14 +6,14 @@ list_intention = ['', 'Baca Buku', 'Pinjam Buku', 'Belajar']
 conn = st.connection("postgresql", type="sql", 
                      url="postgresql://nadia.2043221105:P4YglWGXSp3e@ep-muddy-rice-61227326.us-east-2.aws.neon.tech/web")
 with conn.session as session:
-    query = text('CREATE TABLE IF NOT EXISTS SCHEDULE (id serial, student_name text, student_id text, phone_number text, visit_date date, visit_time time, intention text, book_title text, book_code varchar(50));')
+    query = text('CREATE TABLE IF NOT EXISTS database_visitors (id serial, student_name text, student_id text, phone_number text, visit_date date, visit_time time, intention text, book_title text, book_code varchar(50));')
     session.execute(query)
 
 st.header('DAFTAR KEHADIRAN RUANG BACA DEPARTEMEN STATISTIKA BISNIS')
 page = st.sidebar.selectbox("Pilih Menu", ["View Data","Edit Data"])
 
 if page == "View Data":
-    data = conn.query('SELECT * FROM schedule ORDER By id;', ttl="0").set_index('id')
+    data = conn.query('SELECT * FROM database_visitors ORDER By id;', ttl="0").set_index('id')
     st.dataframe(data)
 
 if page == "Edit Data":
@@ -63,7 +63,7 @@ if page == "Edit Data":
                 
                 with col2:
                     if st.form_submit_button('DELETE'):
-                        query = text(f'DELETE FROM schedule WHERE id=:1;')
+                        query = text(f'DELETE FROM database_visitors WHERE id=:1;')
                         session.execute(query, {'1':id})
                         session.commit()
                         st.experimental_rerun()
