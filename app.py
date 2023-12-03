@@ -19,7 +19,7 @@ if page == "View Data":
 if page == "Edit Data":
     if st.button('Tambah Data'):
         with conn.session as session:
-            query = text('INSERT INTO database_visitors (student_name, student_id, phone_number, visit_date, visit_time, intention, book_title, book_code) \
+            query = text('INSERT INTO database_visitors ("Name", "NRP", "Phone Number", "Visit Date", "Visit Time", "Intention", "Book Title", "Book Code") \
                           VALUES (:1, :2, :3, :4, :5, :6, :7, :8);')
             session.execute(query, {'1':'', '2':'', '3':'', '4':None, '5':None, '6':'', '7':'', '8':''})
             session.commit()
